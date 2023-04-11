@@ -1,15 +1,15 @@
 # fullstack project
 
 current progress
-https://fullstackopen.com/en/part1/a_more_complex_state_debugging_react_apps
+https://fullstackopen.com/en/part2/rendering_a_collection_modules
 
 ## To Do
 
 - [ ] Part 0
 - [x] Part 1
-    - courseinformation
-    - unicafe
-    - anecdotes
+- courseinformation
+- unicafe
+- anecdotes
 - [ ] Part 2
 - [ ] Part 3
 - [ ] Part 4
