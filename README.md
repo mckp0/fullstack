@@ -7,10 +7,12 @@ https://fullstackopen.com/en/part2/rendering_a_collection_modules
 
 - [ ] Part 0
 - [x] Part 1
-- courseinformation
+- courseinfo
 - unicafe
 - anecdotes
 - [ ] Part 2
+- courseinfo
+- phonebook
 - [ ] Part 3
 - [ ] Part 4
 - [ ] Part 5
