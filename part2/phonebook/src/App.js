@@ -3,12 +3,14 @@ import PersonForm from "./components/PerformForm";
 import Person from "./components/Person";
 import Filter from "./components/Filter";
 import personService from "./services/phonebook";
+import Notification from "./components/Notification"
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filterName, setFilterName] = useState("");
+  const [message, setMessage] = useState([null,null])
 
   useEffect(() => {
     personService.getAll().then((persons) => setPersons(persons));
@@ -34,9 +36,8 @@ const App = () => {
       personService
         .del(person.id)
         .catch(error => {
-          alert(
-            `${person.name} was already deleted from the server`
-          )
+          setMessage([`Information of ${person.name} has already been removed from server`, 'error'])
+          setTimeout(() => setMessage([null,null]), 3000);
         });
       personService.getAll().then((persons) => setPersons(persons));
     } else {
@@ -70,11 +71,12 @@ const App = () => {
               setPersons(persons.map(person => person.id === updatedPerson.id ? updatedPerson : person))
               setNewName("");
               setNewNumber("");
+              setMessage([`${oldPerson.name}'s number was changed to ${updatedPerson.number}`, 'success'])
+              setTimeout(() => setMessage([null,null]), 3000);
             } )
             .catch(error => {
-              alert(
-                `the change was already updated in the server`
-              )
+              setMessage([`Information of ${oldPerson.name} has already been removed from server`, 'error'])
+              setTimeout(() => setMessage([null,null]), 3000);
             })
         } else {
           setNewName("");
@@ -88,6 +90,8 @@ const App = () => {
         setPersons(persons.concat(person));
         setNewName("");
         setNewNumber("");
+      setMessage([`Added ${person.name}`, 'success'])
+      setTimeout(() => setMessage([null,null]), 3000);
       });
     }
   };
@@ -95,6 +99,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message} />
       <Filter handleFilter={handleFilter} />
       <h2>add a new</h2>
       <PersonForm
