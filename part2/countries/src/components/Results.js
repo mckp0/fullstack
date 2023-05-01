@@ -1,10 +1,14 @@
-const Results = ({ results }) => {
+const Results = ({ results, handleShow }) => {
   if (results.length > 10) {
     return <div>Too many matches, specify another filter</div>
   }
 
   if (results.length === 1) {
     const country = results[0]
+    console.log(country);
+    if (country === "error") {
+      return <div>No Country Found</div>
+    }
     return (
       <div>
         <h1>{country.name.common}</h1>
@@ -16,12 +20,22 @@ const Results = ({ results }) => {
             <li key={index}>{language}</li>
           ))}
         </ul>
-        <img src={country.flags.png} alt={country.flags.alt} width='200' height='200' />
+        <img
+          src={country.flags.png}
+          alt={country.flags.alt}
+          width="200"
+          height="200"
+        />
       </div>
     )
   }
 
-  return results.map((country) => <div>{country.name.common}</div>)
+  return results.map((country, index) => (
+    <div key={index}>
+      {country.name.common}{" "}
+      <button onClick={() => handleShow(country)}>show</button>{" "}
+    </div>
+  ))
 }
 
 export default Results
